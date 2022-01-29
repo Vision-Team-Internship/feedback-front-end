@@ -67,3 +67,15 @@ export interface UpdateMessage {
   note: string;
   feedback_id: string;
 }
+
+interface User {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  gender: string;
+  role: string;
+  profileImage: string;
+  email: string;
+  password: string;
+  phonenumber: string;
+}

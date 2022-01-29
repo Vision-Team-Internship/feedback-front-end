@@ -8,10 +8,12 @@ import { AdminService } from 'src/app/services/admin/admin.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  username: any = '';
   constructor(private admin: AdminService, private router: Router) {}
 
   ngOnInit(): void {
     this.router.navigate(['/d/msg']);
+    this.username = localStorage.getItem('username');
   }
   logout() {
     this.admin.logout();

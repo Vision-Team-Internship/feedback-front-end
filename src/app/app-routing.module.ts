@@ -14,6 +14,7 @@ import { HomeFloorComponent } from './components/home-floor/home-floor.component
 import { HomeFloorItemComponent } from './components/home-floor/home-floor-item/home-floor-item.component';
 import { HomeDepartmentComponent } from './components/home-department/home-department.component';
 import { HomeDepartmentItemComponent } from './components/home-department/home-department-item/home-department-item.component';
+import { ProfileComponent } from './components/navbar/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,10 @@ const routes: Routes = [
   {
     path: 'room/:id',
     component: RoomItemComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
   },
   {
     path: 'login',

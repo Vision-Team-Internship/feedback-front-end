@@ -28,6 +28,7 @@ import { HomeFloorItemComponent } from './components/home-floor/home-floor-item/
 import { HomeDepartmentComponent } from './components/home-department/home-department.component';
 import { HomeDepartmentItemComponent } from './components/home-department/home-department-item/home-department-item.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProfileComponent } from './components/navbar/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomeDepartmentComponent,
     HomeDepartmentItemComponent,
     NavbarComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
