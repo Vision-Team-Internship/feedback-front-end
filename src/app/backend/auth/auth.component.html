@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card border-0 cs-shadow">
+        <div class="card-body">
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group pb-3">
+              <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
+                aria-describedby="emailHelp" formControlName="email" placeholder="Email" />
+            </div>
+            <div class="form-group pb-3">
+              <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
+                formControlName="password" placeholder="Password" />
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-lg btn-primary col-12">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

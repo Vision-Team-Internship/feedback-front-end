@@ -1,0 +1,16 @@
+<div class="form-group">
+  <label for="exampleInputEmail1">
+    <h5>Floor Number</h5>
+  </label>
+  <form [formGroup]="floorForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-3">
+        <input type="text" class="form-control shadow-sm rounded" id="exampleInputEmail1" aria-describedby="emailHelp"
+          formControlName="name" placeholder="Floor" />
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-success">Add</button>
+      </div>
+    </div>
+  </form>
+</div>
