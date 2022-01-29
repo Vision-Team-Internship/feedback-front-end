@@ -8,10 +8,9 @@
           <div class="card border-0 cs-shadow rounded feedback">
             <div class="card-body">
               <div class="header">
-                <strong><Label>VFeedBack For Room{{ roomData.name }}</Label></strong>
+                <strong><Label>VFeedBack For {{ floorData.name }}</Label></strong>
               </div>
               <form [formGroup]="submitForm" (submit)="sendMessage()">
-                <input type="hidden" [ngModel]="roomID" name="room_id" formControlName="room_id" value="{{ roomID }}" />
                 <div class="title pt-3 pb-3">
                   <div class="d-flex justify-content-between pb-2">
                     <strong><label>Title</label></strong>

@@ -19,7 +19,9 @@ export class Service {
   public getfloor(): Observable<Floor[]> {
     return this.http.get<Floor[]>(this.floorApi);
   }
-
+  public getfloorDetail(id: string): Observable<Floor[]> {
+    return this.http.get<Floor[]>(this.floorApi + '/' + id);
+  }
   public getDepartment(): Observable<Department[]> {
     return this.http.get<Department[]>(this.departmentApi);
   }

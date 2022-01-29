@@ -21,6 +21,13 @@ import { AllFeedbackComponent } from './backend/all-feedback/all-feedback.compon
 import { ProcessComponent } from './backend/process/process.component';
 import { CompletedMessageComponent } from './backend/completed-message/completed-message.component';
 import { MessageItemComponent } from './backend/message-item/message-item.component';
+import { HomeComponent } from './components/home/home.component';
+import { RequestFormComponent } from './components/request-form/request-form.component';
+import { HomeFloorComponent } from './components/home-floor/home-floor.component';
+import { HomeFloorItemComponent } from './components/home-floor/home-floor-item/home-floor-item.component';
+import { HomeDepartmentComponent } from './components/home-department/home-department.component';
+import { HomeDepartmentItemComponent } from './components/home-department/home-department-item/home-department-item.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +47,13 @@ import { MessageItemComponent } from './backend/message-item/message-item.compon
     ProcessComponent,
     CompletedMessageComponent,
     MessageItemComponent,
+    HomeComponent,
+    RequestFormComponent,
+    HomeFloorComponent,
+    HomeFloorItemComponent,
+    HomeDepartmentComponent,
+    HomeDepartmentItemComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

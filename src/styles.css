@@ -1,4 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+.home h5 {
+  font-size: 20px;
+}
+.home p {
+  font-size: 14px;
+}
+.home a {
+  text-decoration: none;
+  font-size: 14px;
+}
+.home .report {
+  color: rgb(216, 25, 25);
+}
+.home .request {
+  color: rgba(26, 26, 219, 0.876);
+}
+.home p.short {
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 body {
   font-family: "Poppins", sans-serif;
   color: #202124;

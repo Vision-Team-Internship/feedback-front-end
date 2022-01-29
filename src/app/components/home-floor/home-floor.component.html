@@ -1,18 +1,17 @@
 <app-navbar></app-navbar>
-
 <div class="container">
   <div class="pb-5 pt-3">
     <h4>
-      All Room
+      All Floor
     </h4>
     <hr>
     <div class="row rooms">
-      <div class="col-md-3 pb-3" *ngFor="let item of rooms">
-        <a routerLink="/room/{{ item._id }}">
+      <div class="col-md-3 pb-3" *ngFor="let item of floors">
+        <a routerLink="/floor/{{ item._id }}">
           <div class="card">
             <div class="card-body cs-shadow text-center">
               <h4>
-                Room {{ item.name }}
+                {{ item.name }}
               </h4>
             </div>
           </div>
