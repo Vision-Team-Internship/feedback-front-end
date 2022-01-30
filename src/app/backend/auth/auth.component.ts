@@ -19,6 +19,9 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.auth.loggedIn()) {
+      this.router.navigate(['/']);
+    }
     this.loginForm = this.fb.group({
       email: [''],
       password: [''],
