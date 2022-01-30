@@ -2,7 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Message, Department, Floor, Room, UpdateMessage } from 'src/model';
+import {
+  Message,
+  Department,
+  Floor,
+  Room,
+  UpdateMessage,
+  User,
+} from 'src/model';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -24,11 +31,17 @@ interface roomResponse {
 interface MessageResponse {
   payload: UpdateMessage;
 }
+interface userResponse {
+  payload: User;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
   constructor(private http: HttpClient, private router: Router) {}
+  private userApi = 'https://feedback-project-api.herokuapp.com/api/v1/users';
+  private userRegisterApi =
+    'https://feedback-project-api.herokuapp.com/register';
 
   private loginApi = 'https://feedback-project-api.herokuapp.com/login';
   private floorApi = 'https://feedback-project-api.herokuapp.com/api/v1/floors';
@@ -57,6 +70,17 @@ export class AdminService {
 
   private completedMessageApiUrl =
     'https://feedback-project-api.herokuapp.com/api/v1/completeds';
+
+  // createFloor(data: any): Observable<floorResponse> {
+  //   return this.http.post<floorResponse>(this.floorApi, data, httpOption);
+  // }
+  getAllUser() {
+    return this.http.get<User>(this.userApi, httpOption);
+  }
+
+  createUSer(data: any): Observable<userResponse> {
+    return this.http.post<userResponse>(this.userRegisterApi, data, httpOption);
+  }
 
   getMessageById(id: string) {
     return this.http.get<Message[]>(`${this.messageApiUrl}/${id}`, httpOption);

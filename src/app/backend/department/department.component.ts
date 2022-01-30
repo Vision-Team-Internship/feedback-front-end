@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { Department, Floor } from 'src/model';
 
@@ -18,7 +17,6 @@ export class DepartmentComponent implements OnInit {
   constructor(
     private departmentService: AdminService,
     private floorService: AdminService,
-    private router: Router,
     private fb: FormBuilder
   ) {}
 

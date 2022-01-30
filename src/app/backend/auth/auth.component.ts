@@ -30,10 +30,8 @@ export class AuthComponent implements OnInit {
   login() {
     this.auth.login(this.f.email.value, this.f.password.value).subscribe(
       (data) => {
-        console.log(data.username);
         console.log(data.token);
         localStorage.setItem('token', data.token);
-        localStorage.setItem('username', data.username);
         this.router.navigate(['/d']);
       },
       (err) => {

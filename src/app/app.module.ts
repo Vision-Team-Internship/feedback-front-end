@@ -29,6 +29,8 @@ import { HomeDepartmentComponent } from './components/home-department/home-depar
 import { HomeDepartmentItemComponent } from './components/home-department/home-department-item/home-department-item.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/navbar/profile/profile.component';
+import { UserComponent } from './backend/user/user.component';
+import { UserRoleComponent } from './backend/user-role/user-role.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { ProfileComponent } from './components/navbar/profile/profile.component'
     HomeDepartmentItemComponent,
     NavbarComponent,
     ProfileComponent,
+    UserComponent,
+    UserRoleComponent,
   ],
   imports: [
     BrowserModule,

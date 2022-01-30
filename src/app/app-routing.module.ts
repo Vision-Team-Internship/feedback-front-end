@@ -15,19 +15,23 @@ import { HomeFloorItemComponent } from './components/home-floor/home-floor-item/
 import { HomeDepartmentComponent } from './components/home-department/home-department.component';
 import { HomeDepartmentItemComponent } from './components/home-department/home-department-item/home-department-item.component';
 import { ProfileComponent } from './components/navbar/profile/profile.component';
+import { UserAuthGuard } from './backend/auth/user-auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'report-form',
     component: FormComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'request-form',
     component: RequestFormComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'd',
@@ -41,30 +45,37 @@ const routes: Routes = [
   {
     path: 'floor',
     component: HomeFloorComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'floor/:id',
     component: HomeFloorItemComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'department',
     component: HomeDepartmentComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'department/:id',
     component: HomeDepartmentItemComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'room',
     component: RoomComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'room/:id',
     component: RoomItemComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'login',

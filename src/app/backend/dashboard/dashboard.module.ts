@@ -11,6 +11,7 @@ import { AllFeedbackComponent } from '../all-feedback/all-feedback.component';
 import { ProcessComponent } from '../process/process.component';
 import { CompletedMessageComponent } from '../completed-message/completed-message.component';
 import { MessageItemComponent } from '../message-item/message-item.component';
+import { UserComponent } from '../user/user.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,11 @@ const routes: Routes = [
     path: 'msg-completed/:id',
     pathMatch: 'full',
     component: MessageItemComponent,
+  },
+  {
+    path: 'user',
+    pathMatch: '',
+    component: UserComponent,
   },
   {
     path: '',

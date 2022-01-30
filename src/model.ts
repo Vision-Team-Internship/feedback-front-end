@@ -68,14 +68,13 @@ export interface UpdateMessage {
   feedback_id: string;
 }
 
-interface User {
+export interface User {
   _id: string;
-  firstname: string;
-  lastname: string;
+  username: string;
   gender: string;
   role: string;
-  profileImage: string;
+  avatar: string;
   email: string;
   password: string;
-  phonenumber: string;
+  phone: string;
 }
