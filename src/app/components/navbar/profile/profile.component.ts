@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/services/admin/admin.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,12 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  username: any = localStorage.getItem('username');
-  email: any = localStorage.getItem('email');
-  role: any = localStorage.getItem('role');
-  phone: any = localStorage.getItem('phone');
-  cardID: any = localStorage.getItem('cardID');
-  constructor() {}
+  constructor(private admin: AdminService) { }
 
-  ngOnInit(): void {}
+  fullName: any = this.admin.user.username;
+  email: any = this.admin.user.email;
+  role: any = this.admin.user.role;
+  cardID: string = this.admin.user.cardID
+
+  ngOnInit(): void { }
+
+  logout() {
+    this.admin.logout();
+  }
 }

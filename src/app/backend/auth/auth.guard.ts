@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/services/admin/admin.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private adminService: AdminService, private router: Router) {}
+  constructor(private adminService: AdminService, private router: Router) { }
   canActivate(): boolean {
     if (this.adminService.loggedIn()) {
       return true;

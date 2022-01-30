@@ -16,7 +16,7 @@ export class AuthComponent implements OnInit {
     private auth: AdminService,
     private fb: FormBuilder,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -30,9 +30,12 @@ export class AuthComponent implements OnInit {
   login() {
     this.auth.login(this.f.email.value, this.f.password.value).subscribe(
       (data) => {
-        console.log(data.token);
         localStorage.setItem('token', data.token);
-        this.router.navigate(['/d']);
+        if (data.role == 'admin') {
+          this.router.navigate(['/d']);
+        } else {
+          this.router.navigate(['/']);
+        }
       },
       (err) => {
         alert(err);

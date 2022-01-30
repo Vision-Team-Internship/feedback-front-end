@@ -38,7 +38,6 @@ interface userResponse {
   providedIn: 'root',
 })
 export class AdminService {
-  constructor(private http: HttpClient, private router: Router) {}
   private userApi = 'https://feedback-project-api.herokuapp.com/api/v1/users';
   private userRegisterApi =
     'https://feedback-project-api.herokuapp.com/register';
@@ -71,9 +70,16 @@ export class AdminService {
   private completedMessageApiUrl =
     'https://feedback-project-api.herokuapp.com/api/v1/completeds';
 
-  // createFloor(data: any): Observable<floorResponse> {
-  //   return this.http.post<floorResponse>(this.floorApi, data, httpOption);
-  // }
+  user: User;
+
+  constructor(private http: HttpClient, private router: Router) {
+    this.user = this.getToken(String(localStorage.getItem('token')));
+  }
+
+  getToken(token: string) {
+    return JSON.parse(atob(token.split('.')[1])) as User;
+  }
+
   getAllUser() {
     return this.http.get<User>(this.userApi, httpOption);
   }

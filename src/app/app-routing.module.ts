@@ -21,22 +21,25 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'report-form',
     component: FormComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'request-form',
     component: RequestFormComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'd',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, UserAuthGuard],
+    data: {
+      role: 'admin',
+    },
     loadChildren: () =>
       import('./backend/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
@@ -45,37 +48,37 @@ const routes: Routes = [
   {
     path: 'floor',
     component: HomeFloorComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'floor/:id',
     component: HomeFloorItemComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'department',
     component: HomeDepartmentComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'department/:id',
     component: HomeDepartmentItemComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'room',
     component: RoomComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'room/:id',
     component: RoomItemComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [UserAuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
@@ -94,4 +97,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
