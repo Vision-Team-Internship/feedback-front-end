@@ -23,7 +23,7 @@ export class HomeFloorItemComponent implements OnInit {
     private service: Service,
     private actRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.floorID = this.actRoute.snapshot.params['id'];
@@ -46,6 +46,7 @@ export class HomeFloorItemComponent implements OnInit {
       feedbackLevel: this.submitForm.controls['feedbackLevel'].value,
       feedbackType: 'floor',
       uniqueIDs: [this.floorID],
+      type: 'report'
     };
     console.log(this.submitForm.value);
     console.log(data);

@@ -15,8 +15,6 @@ const httpOption = {
   headers: new HttpHeaders({
     'content-type': 'application/json',
     'auth-token': String(localStorage.getItem('token')),
-    // 'auth-token':
-    //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWEwNTY5ZWI1OGM5YWNmOTA4YmVlNzciLCJpYXQiOjE2Mzk0NzQ5MDB9.cIdU9dp_yDBufGfug05nTAmFaEgr1qmUjPZy_LIYZaQ',
   }),
 };
 interface floorResponse {

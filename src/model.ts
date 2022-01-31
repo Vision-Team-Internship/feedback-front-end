@@ -21,6 +21,7 @@ export interface SendMessage {
   feedbackLevel: string;
   feedbackType: string;
   uniqueIDs: string[];
+  type: string;
 }
 
 export interface MSG {
@@ -62,6 +63,7 @@ export interface Message {
   archivedDate: string;
   url: string;
   isOpen: boolean;
+  type: string;
 }
 export interface UpdateMessage {
   note: string;

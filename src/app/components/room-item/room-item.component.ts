@@ -18,7 +18,7 @@ export class RoomItemComponent implements OnInit {
     private router: Router,
     private actRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.roomID = this.actRoute.snapshot.params['id'];
@@ -48,6 +48,7 @@ export class RoomItemComponent implements OnInit {
       feedbackLevel: this.submitForm.controls['feedbackLevel'].value,
       feedbackType: 'room',
       uniqueIDs: [this.submitForm.controls['room_id'].value],
+      type: 'report'
     };
     console.log(this.submitForm.value);
     console.log(data);

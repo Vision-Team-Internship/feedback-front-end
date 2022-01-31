@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/services/admin/admin.service';
 
 @Component({
   selector: 'app-request-form',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestFormComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private adminService: AdminService) { }
+  data: any = this.adminService.user
   ngOnInit(): void {
+    console.log(this.data)
   }
 
 }

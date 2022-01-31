@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Department, Floor, Room, SendMessage } from 'src/model';
 
+const httpOption = {
+  headers: new HttpHeaders({
+    'content-type': 'application/json',
+    'auth-token': String(localStorage.getItem('token')),
+  }),
+};
 @Injectable({
   providedIn: 'root',
 })
 export class Service {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private roomApi = '//feedback-project-api.herokuapp.com/api/v1/rooms';
   private floorApi = 'https://feedback-project-api.herokuapp.com/api/v1/floors';
@@ -31,7 +37,7 @@ export class Service {
   }
 
   public sendMessage(data: SendMessage): Observable<any> {
-    return this.http.post(this.messageApi, data);
+    return this.http.post(this.messageApi, data, httpOption);
   }
 
   public getRoomDetail(id: string) {
