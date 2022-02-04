@@ -1,73 +1,32 @@
 <app-navbar></app-navbar>
 <div class="container">
   <div class="pt-3 pb-4">
-    <div class="card border-0 cs-shadow">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6 border-right">
-            <div class="row mb-2">
-              <div class="col-md-5">
-                <strong> Your ID: </strong>
-              </div>
-              <div class="col-md-7">
-                {{ data.cardID }}
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-5">
-                <strong> Full Name: </strong>
-              </div>
-              <div class="col-md-7">
-                {{ data.username }}
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-5">
-                <strong> Email: </strong>
-              </div>
-              <div class="col-md-7">
-                {{ data.email }}
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-5">
-                <strong> Position: </strong>
-              </div>
-              <div class="col-md-7">
-                {{ data.role }}
-              </div>
-            </div>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card cs-shadow border-0">
+          <div class="card-header">
+            <strong>Request Form</strong>
           </div>
-          <div class="col-md-6">
-            <form>
+          <div class="card-body">
+            <form [formGroup]="requestForm" (submit)="sendRequest()">
               <div class="form-group">
-                <label for="Request-title">Request Title</label>
-                <input
-                  type="text"
-                  class="form-control form-control-lg"
-                  id="Request-title"
-                />
+                <label for="Request-title">Title</label>
+                <input type="text" class="form-control " id="Request-title" formControlName="title" />
                 <small id="emailHelp" class="form-text text-muted">
                   Request anything you want
                 </small>
               </div>
               <div class="form-group">
-                <label for="Request-price">Price</label>
-                <input
-                  type="number"
-                  class="form-control form-control-lg"
-                  id="Request-price"
-                />
+                <label for="Request-message">Tell us why</label>
+                <textarea id="Request-message" rows="4" class="form-control" formControlName="message"></textarea>
+                <small id="emailHelp" class="form-text text-muted">
+                  Our response will send to email:
+                  <strong>
+                    {{data.email}}
+                  </strong>
+                </small>
               </div>
-              <div class="form-group">
-                <label for="Request-message">Message</label>
-                <textarea
-                  id="Request-message"
-                  rows="4"
-                  class="form-control form-control-lg"
-                ></textarea>
-              </div>
-              <button class="btn btn-lg btn-primary col-12">
+              <button class="btn btn-primary col-12">
                 Send Request
               </button>
             </form>
