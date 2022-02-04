@@ -9,7 +9,7 @@ import { Department, Floor, Room, SendMessage } from 'src/model';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-  constructor(private service: Service, private fb: FormBuilder) { }
+  constructor(private service: Service, private fb: FormBuilder) {}
 
   submitForm: FormGroup = new FormGroup({});
   floors: Floor[] = [];
@@ -84,7 +84,7 @@ export class FormComponent implements OnInit {
       feedbackLevel: this.submitForm.controls['feedbackLevel'].value,
       feedbackType: feedBackType,
       uniqueIDs: uniqueIDs,
-      type: 'report'
+      type: 'report',
     };
     console.log(data);
     this.service.sendMessage(data).subscribe(
