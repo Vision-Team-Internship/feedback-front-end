@@ -38,24 +38,23 @@ export class ProcessComponent implements OnInit {
     this.f._id.setValue(data._id);
 
     const msg: UpdateMessage = {
-      note: 'Completed',
+      note: 'Your request or report has been solved',
       feedback_id: this.f._id.value,
     };
-
+    this.inProcessMessage = this.inProcessMessage.filter(
+      (inProcessMessage) => inProcessMessage._id != id
+    );
     this.adminService.completeMessage(msg).subscribe((res) => {
       console.log(res);
-      this.inProcessMessage = this.inProcessMessage.filter(
-        (inProcessMessage) => inProcessMessage._id != id
-      );
     });
   }
 
   deleteMessage(id: string) {
+    this.inProcessMessage = this.inProcessMessage.filter(
+      (inProcessMessage) => inProcessMessage._id != id
+    );
     this.adminService.deleteMessage(id).subscribe((res) => {
       console.log(res);
-      this.inProcessMessage = this.inProcessMessage.filter(
-        (inProcessMessage) => inProcessMessage._id != id
-      );
     });
   }
   msgItem(msg_ID: string) {

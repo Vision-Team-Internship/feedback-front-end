@@ -47,37 +47,36 @@ export class MessageComponent implements OnInit {
     this.f._id.setValue(data._id);
 
     const msg: UpdateMessage = {
-      note: 'ok',
+      note: 'Your request or report has been approved and We are working on it. When the work done we will inform you again!',
       feedback_id: this.f._id.value,
     };
+    if (this.highFeedback) {
+      this.highMessages = this.highMessages.filter(
+        (highMessages) => highMessages._id != id
+      );
+    } else {
+      this.normalMessages = this.normalMessages.filter(
+        (highMessages) => highMessages._id != id
+      );
+    }
     this.messageService.approvedMessage(msg).subscribe((res) => {
-      if (this.highFeedback) {
-        console.log(res);
-        this.highMessages = this.highMessages.filter(
-          (highMessages) => highMessages._id != id
-        );
-      } else {
-        console.log(res);
-        this.normalMessages = this.normalMessages.filter(
-          (highMessages) => highMessages._id != id
-        );
-      }
+      console.log(res);
     });
   }
 
   deleteMessage(id: string) {
+    if (this.highFeedback) {
+      this.highMessages = this.highMessages.filter(
+        (messages) => messages._id != id
+      );
+    }
+    if (this.normalMessages) {
+      this.normalMessages = this.normalMessages.filter(
+        (messages) => messages._id != id
+      );
+    }
     this.messageService.deleteMessage(id).subscribe((res) => {
       console.log(res);
-      if (this.highFeedback) {
-        this.highMessages = this.highMessages.filter(
-          (messages) => messages._id != id
-        );
-      }
-      if (this.normalMessages) {
-        this.normalMessages = this.normalMessages.filter(
-          (messages) => messages._id != id
-        );
-      }
     });
   }
   showNormal() {

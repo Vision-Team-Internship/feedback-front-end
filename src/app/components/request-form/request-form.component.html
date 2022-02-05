@@ -1,36 +1,75 @@
 <app-navbar></app-navbar>
 <div class="container">
   <div class="pt-3 pb-4">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card cs-shadow border-0">
-          <div class="card-header">
-            <strong>Request Form</strong>
+    <ng-container *ngIf="!submitted">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card cs-shadow border-0">
+            <div class="card-header">
+              <strong>Request Form</strong>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="requestForm" (submit)="sendRequest()"
+                onsubmit="myButton.disabled = true; return true;">
+                <div class="form-group">
+                  <label for="Request-title">Title</label>
+                  <input type="text" class="form-control " id="Request-title" formControlName="title" />
+                  <small id="emailHelp" class="form-text text-muted">
+                    Request anything you want
+                  </small>
+                </div>
+                <div class="form-group">
+                  <label for="Request-message">Tell us why</label>
+                  <textarea id="Request-message" rows="4" class="form-control" formControlName="message"></textarea>
+
+                  <small id="emailHelp" class="form-text text-muted">
+                    Our response will send to email:
+                    <strong>
+                      {{data.email}}
+                    </strong>
+                  </small>
+                </div>
+                <div class="mb-4">
+                  <div class="pb-1">
+                    <label class="form-check-label"> Situation </label>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-check form-check-inline">
+                        <input formControlName="feedbackLevel" class="form-check-input" type="radio"
+                          name="feedbackLevel" id="High" value="High" required />
+                        <label class="form-check-label text-danger" for="High">Priority</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-check form-check-inline">
+                        <input formControlName="feedbackLevel" class="form-check-input" type="radio"
+                          name="feedbackLevel" id="Normal" value="Medium" required />
+                        <label class="form-check-label text-primary" for="Normal">Normal</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-primary col-12" [disabled]="!requestForm.valid" name="myButton">
+                  Send Request
+                </button>
+              </form>
+            </div>
           </div>
-          <div class="card-body">
-            <form [formGroup]="requestForm" (submit)="sendRequest()">
-              <div class="form-group">
-                <label for="Request-title">Title</label>
-                <input type="text" class="form-control " id="Request-title" formControlName="title" />
-                <small id="emailHelp" class="form-text text-muted">
-                  Request anything you want
-                </small>
-              </div>
-              <div class="form-group">
-                <label for="Request-message">Tell us why</label>
-                <textarea id="Request-message" rows="4" class="form-control" formControlName="message"></textarea>
-                <small id="emailHelp" class="form-text text-muted">
-                  Our response will send to email:
-                  <strong>
-                    {{data.email}}
-                  </strong>
-                </small>
-              </div>
-              <button class="btn btn-primary col-12">
-                Send Request
-              </button>
-            </form>
-          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngIf="submitted">
+    <div class="card border-0 cs-shadow">
+      <div class="card-body">
+        <div class="p-4">
+          <h2>VFeedBack</h2>
+          <p class="pt-3 pb-2">Your response has been recorded</p>
+          <a (click)="newMsg()" href="javascript:void(0)">
+            Submit another response
+          </a>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   constructor(private admin: AdminService, private router: Router) {}
 
   ngOnInit(): void {
-    this.router.navigate(['/d/msg']);
+    // this.router.navigate(['/d/msg']);
     this.username = localStorage.getItem('username');
   }
   logout() {

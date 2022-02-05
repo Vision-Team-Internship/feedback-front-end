@@ -17,11 +17,14 @@ export class RequestFormComponent implements OnInit {
 
   requestForm: FormGroup = new FormGroup({});
   data: any = this.adminService.user;
+  submitted = false;
+
   ngOnInit(): void {
     console.log(this.data);
     this.requestForm = this.fb.group({
       title: new FormControl(''),
       message: new FormControl(''),
+      feedbackLevel: new FormControl(''),
     });
   }
   get f() {
@@ -31,12 +34,17 @@ export class RequestFormComponent implements OnInit {
     const data: any = {
       title: this.f.title.value,
       message: this.f.message.value,
+      feedbackLevel: this.f.feedbackLevel.value,
       type: 'request',
     };
 
     this.service.sendMessage(data).subscribe((res) => {
       console.log(res);
-      this.requestForm.reset;
+      this.submitted = true;
     });
+  }
+  newMsg(): void {
+    this.submitted = false;
+    this.requestForm.reset();
   }
 }

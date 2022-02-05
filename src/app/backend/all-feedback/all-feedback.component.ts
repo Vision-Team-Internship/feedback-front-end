@@ -35,19 +35,20 @@ export class AllFeedbackComponent implements OnInit {
     this.f._id.setValue(data._id);
 
     const msg: UpdateMessage = {
-      note: 'ok',
+      note: 'Your request or report has been approved and We are working on it. When the work done we will inform you again!',
       feedback_id: this.f._id.value,
     };
+    this.messages = this.messages.filter((msg) => msg._id != id);
+
     this.messageService.approvedMessage(msg).subscribe((res) => {
       console.log(res);
-      this.messages = this.messages.filter((msg) => msg._id != id);
     });
   }
 
   deleteMessage(id: string) {
+    this.messages = this.messages.filter((messages) => messages._id != id);
     this.messageService.deleteMessage(id).subscribe((res) => {
       console.log(res);
-      this.messages = this.messages.filter((messages) => messages._id != id);
     });
   }
   msgItem(msg_ID: string) {

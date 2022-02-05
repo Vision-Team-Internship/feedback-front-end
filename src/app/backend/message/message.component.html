@@ -57,7 +57,7 @@
     <div class="msg-item" (mouseover)="showAction(item._id)" (mouseleave)="hideAction()" (dblclick)="msgItem(item._id)">
       <div class="card border-left-0 border-right-0 border-top-0" [ngClass]="item.isOpen == false ? 'card-bg' : ''">
         <div class="pr-3 pl-3 pt-3 pb-3">
-          <div class="row justify-content-between">
+          <div class="row justify-content-around">
             <div class="col-md-2">
               <div class="custom-control custom-checkbox checkbox-lg">
                 <input type="checkbox" class="custom-control-input" id="{{ item._id }}" />
@@ -72,7 +72,7 @@
                 </label>
               </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
               <div class="b">
                 <strong>{{ item.title }}</strong>
                 -
@@ -81,38 +81,26 @@
                 </span>
               </div>
             </div>
-            <div class="col-md-2" *ngIf="messageID == item._id">
+            <div class="col-md-3" *ngIf="messageID == item._id">
               <div class="row justify-content-end pr-3">
-                <div class="col-md-2">
-                  <div class="icon icon-blue" (click)="ok()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-inboxes-fill" viewBox="0 0 16 16">
-                      <path
-                        d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1H4.98zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z" />
-                    </svg>
+                <div class="col-md-3">
+                  <div (click)="deleteMessage(item._id)">
+                    <span class="badge badge-secondary select-all">Delete</span>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="icon icon-red" (click)="deleteMessage(item._id)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-trash-fill" viewBox="0 0 16 16">
-                      <path
-                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                    </svg>
+                <div class="col-md-3">
+                  <div (click)="deleteMessage(item._id)">
+                    <span class="badge badge-danger select-all">Reject</span>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="icon icon-green" (click)="approvedMessage(item,item._id)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd"
-                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-                    </svg>
+                <div class="col-md-3">
+                  <div (click)="approvedMessage(item,item._id)">
+                    <span class="badge badge-success select-all">Approve</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-2 text-right" *ngIf="messageID != item._id">
+            <div class="col-md-3 text-right" *ngIf="messageID != item._id">
               {{item.createdDate | date}}
             </div>
           </div>
@@ -127,7 +115,7 @@
     <div class="msg-item" (mouseover)="showAction(item._id)" (mouseleave)="hideAction()">
       <div class="card border-left-0 border-right-0 border-top-0">
         <div class="pr-3 pl-3 pt-3 pb-3">
-          <div class="row d-flex justify-content-between">
+          <div class="row justify-content-around">
             <div class="col-md-2">
               <div class="custom-control custom-checkbox checkbox-lg">
                 <input type="checkbox" class="custom-control-input" id="{{ item._id }}" />
@@ -142,7 +130,7 @@
                 </label>
               </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
               <div class="b">
                 <strong>{{ item.title }}</strong>
                 -
@@ -151,38 +139,26 @@
                 </span>
               </div>
             </div>
-            <div class="col-md-2" *ngIf="messageID == item._id">
+            <div class="col-md-3" *ngIf="messageID == item._id">
               <div class="row justify-content-end pr-3">
-                <div class="col-md-2">
-                  <div class="icon icon-blue" (click)="ok()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-inboxes-fill" viewBox="0 0 16 16">
-                      <path
-                        d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1H4.98zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z" />
-                    </svg>
+                <div class="col-md-3">
+                  <div (click)="deleteMessage(item._id)">
+                    <span class="badge badge-secondary select-all">Delete</span>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="icon icon-red" (click)="deleteMessage(item._id)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-trash-fill" viewBox="0 0 16 16">
-                      <path
-                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                    </svg>
+                <div class="col-md-3">
+                  <div (click)="deleteMessage(item._id)">
+                    <span class="badge badge-danger select-all">Reject</span>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="button icon icon-green" (click)="approvedMessage(item, item._id)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd"
-                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-                    </svg>
+                <div class="col-md-3">
+                  <div (click)="approvedMessage(item,item._id)">
+                    <span class="badge badge-success select-all">Approve</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-2 text-right" *ngIf="messageID != item._id">
+            <div class="col-md-3 text-right" *ngIf="messageID != item._id">
               {{item.createdDate | date}}
             </div>
           </div>

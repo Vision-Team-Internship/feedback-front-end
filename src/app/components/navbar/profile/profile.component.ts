@@ -7,14 +7,10 @@ import { AdminService } from 'src/app/services/admin/admin.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private admin: AdminService) { }
+  constructor(private admin: AdminService) {}
 
-  fullName: any = this.admin.user.username;
-  email: any = this.admin.user.email;
-  role: any = this.admin.user.role;
-  cardID: string = this.admin.user.cardID
-
-  ngOnInit(): void { }
+  userData: any = this.admin.user;
+  ngOnInit(): void {}
 
   logout() {
     this.admin.logout();

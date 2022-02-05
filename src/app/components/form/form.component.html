@@ -4,10 +4,10 @@
   <div class="pt-3 pb-4">
     <div *ngIf="!submitted">
       <div class="card border-0 cs-shadow">
-        <div class="card-header">
-          <strong>Report Form</strong>
-        </div>
         <div class="card-body">
+          <h5 class="pb-3" style="color: rgb(216, 25, 25);">
+            Report Form
+          </h5>
           <form [formGroup]="submitForm" (submit)="sendMessage()" onsubmit="myButton.disabled = true; return true;">
             <div class="row">
               <div class="mb-3" [ngClass]="{

@@ -9,17 +9,20 @@ import { Message } from 'src/model';
   styleUrls: ['./message-item.component.css'],
 })
 export class MessageItemComponent implements OnInit {
-  messageID: string = '';
-  messageData: any = '';
   constructor(
     private actRoute: ActivatedRoute,
     private adminService: AdminService
   ) {}
 
+  messageID: string = '';
+  messageData: any = '';
+  userData: any = this.adminService.user;
+
   ngOnInit(): void {
     this.messageID = this.actRoute.snapshot.params['id'];
     console.log(this.messageID);
     this.loadRoomDetail(this.messageID);
+    console.log(this.messageData);
   }
 
   loadRoomDetail(roomID: any) {
