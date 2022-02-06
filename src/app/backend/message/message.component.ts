@@ -10,14 +10,14 @@ import { Message, UpdateMessage } from 'src/model';
   styleUrls: ['./message.component.css'],
 })
 export class MessageComponent implements OnInit {
-  messages: Message[] = [];
-  highMessages: Message[] = [];
-  normalMessages: Message[] = [];
+  requestMessage: Message[] = [];
+  reportMessage: Message[] = [];
+
   location: string[] = [];
   displayActionBtn = false;
   messageID: string = '';
-  highFeedback = true;
-  normalFeedback = false;
+  request = true;
+  report = false;
   approvedForm!: FormGroup;
   constructor(
     private messageService: AdminService,
@@ -26,13 +26,13 @@ export class MessageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.messageService.getHighMessage().subscribe((data: any) => {
-      console.log('High', data.payload);
-      this.highMessages = data.payload;
+    this.messageService.getRequestMessage().subscribe((data: any) => {
+      console.log('Request Message', data.payload);
+      this.requestMessage = data.payload;
     });
-    this.messageService.getNormalMessage().subscribe((data: any) => {
-      console.log('Normal', data.payload);
-      this.normalMessages = data.payload;
+    this.messageService.getReportMessage().subscribe((data: any) => {
+      console.log('Report Message', data.payload);
+      this.reportMessage = data.payload;
     });
     this.approvedForm = this.fb.group({
       _id: [''],
@@ -50,13 +50,13 @@ export class MessageComponent implements OnInit {
       note: 'Your request or report has been approved and We are working on it. When the work done we will inform you again!',
       feedback_id: this.f._id.value,
     };
-    if (this.highFeedback) {
-      this.highMessages = this.highMessages.filter(
-        (highMessages) => highMessages._id != id
+    if (this.request) {
+      this.requestMessage = this.requestMessage.filter(
+        (requests) => requests._id != id
       );
     } else {
-      this.normalMessages = this.normalMessages.filter(
-        (highMessages) => highMessages._id != id
+      this.reportMessage = this.reportMessage.filter(
+        (reports) => reports._id != id
       );
     }
     this.messageService.approvedMessage(msg).subscribe((res) => {
@@ -65,27 +65,26 @@ export class MessageComponent implements OnInit {
   }
 
   deleteMessage(id: string) {
-    if (this.highFeedback) {
-      this.highMessages = this.highMessages.filter(
-        (messages) => messages._id != id
+    if (this.request) {
+      this.requestMessage = this.requestMessage.filter(
+        (requests) => requests._id != id
       );
-    }
-    if (this.normalMessages) {
-      this.normalMessages = this.normalMessages.filter(
-        (messages) => messages._id != id
+    } else {
+      this.reportMessage = this.reportMessage.filter(
+        (reports) => reports._id != id
       );
     }
     this.messageService.deleteMessage(id).subscribe((res) => {
       console.log(res);
     });
   }
-  showNormal() {
-    this.normalFeedback = true;
-    this.highFeedback = false;
+  showReport() {
+    this.report = true;
+    this.request = false;
   }
-  showHigh() {
-    this.highFeedback = true;
-    this.normalFeedback = false;
+  showRequest() {
+    this.request = true;
+    this.report = false;
   }
   msgItem(msg_ID: string) {
     this.router.navigate(['/d/msg', msg_ID]);

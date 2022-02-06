@@ -26,6 +26,12 @@ body {
   font-family: "Poppins", sans-serif;
   color: #202124;
   background-color: #f6f7fa !important;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .container {
   max-width: 1400px !important;
@@ -180,6 +186,7 @@ a[data-toggle="collapse"] {
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
+  background-color: white !important;
 }
 
 #sidebar img {
@@ -285,6 +292,7 @@ div.a {
   -o-user-select: none;
   user-select: none;
   cursor: pointer;
+  margin-top: -1px;
 }
 .msg-item .card {
   border-radius: 0;
@@ -292,6 +300,7 @@ div.a {
 
 .msg-item strong {
   text-transform: capitalize;
+  font-weight: 550;
 }
 
 .msg-item .des {
@@ -302,7 +311,7 @@ div.a {
   font-weight: 500;
 }
 .msg-item .card-bg {
-  background-color: rgba(238, 238, 238, 0.76);
+  background-color: rgba(242, 245, 245, 0.8);
 }
 .msg-item .card:hover {
   -moz-box-shadow: 0 0 3px rgb(139, 139, 139);
@@ -342,4 +351,11 @@ div.a {
   -o-user-select: none;
   user-select: none;
   cursor: pointer;
+}
+strong .normal {
+  font-weight: normal;
+  font-size: 14px;
+}
+.index {
+  z-index: 2;
 }

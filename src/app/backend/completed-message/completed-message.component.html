@@ -5,38 +5,55 @@
     </div>
     <div class="col-md-1">
       <div class="icon icon-red">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill"
-          viewBox="0 0 16 16">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="bi bi-trash-fill"
+          viewBox="0 0 16 16"
+        >
           <path
-            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+          />
         </svg>
       </div>
     </div>
   </div>
 </div>
-<ng-container *ngFor="let item of completedMessage">
-  <div class="msg-item" (mouseover)="showAction(item._id)" (mouseleave)="hideAction()" (dblclick)="msgItem(item._id)">
-    <div class="card border-right-0 border-top-0"
-      [ngClass]="item.feedbackLevel == 'High' ? 'red-border' : 'blue-border'">
-      <div class="pr-3 pl-3 pt-3 pb-3">
+<ng-container *ngFor="let item of completedMessage; let i = index">
+  <div
+    class="msg-item"
+    (mouseover)="showAction(item._id)"
+    (mouseleave)="hideAction()"
+    (dblclick)="msgItem(item._id)"
+  >
+    <div
+      class="card border-right-0 border-top-0 card-bg"
+      [ngClass]="{
+        'border-top-1': i == 0,
+        'border-top-0': i != 0,
+        'red-border': item.feedbackLevel == 'High',
+        'blue-border': item.feedbackLevel == 'Medium'
+      }"
+    >
+      <div class="pr-3 pl-3 pt-2 pb-2">
         <div class="row d-flex justify-content-between">
           <div class="col-md-2">
             <div class="custom-control custom-checkbox checkbox-lg">
-              <input type="checkbox" class="custom-control-input" id="{{ item._id }}" />
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="{{ item._id }}"
+              />
               <label class="custom-control-label pl-2" for="{{ item._id }}">
-                <strong>
-                  <span *ngFor="let floor of item.feedbackLocation.floor; let key = index;">{{floor}}
-                    <span *ngIf="key != item.feedbackLocation.floor.length - 1">
-                      ,
-                    </span>
-                  </span>
-                </strong>
+                Sivcheu
               </label>
             </div>
           </div>
           <div class="col-md-8">
             <div class="b">
-              <strong>{{ item.title }}</strong>
+              {{ item.title }}
               -
               <span class="des">
                 {{ item.message }}
@@ -47,17 +64,24 @@
             <div class="row justify-content-end pr-3">
               <div class="col-md-2">
                 <div class="icon icon-red" (click)="deleteMessage(item._id)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-trash-fill"
+                    viewBox="0 0 16 16"
+                  >
                     <path
-                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                    />
                   </svg>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-2 text-right" *ngIf="messageID != item._id">
-            {{item.completedDate | date}}
+            {{ item.completedDate | date }}
           </div>
         </div>
       </div>

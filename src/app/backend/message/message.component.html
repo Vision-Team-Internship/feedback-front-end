@@ -5,19 +5,34 @@
     </div>
     <div class="col-md-1">
       <div class="icon icon-red" (click)="ok()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill"
-          viewBox="0 0 16 16">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="bi bi-trash-fill"
+          viewBox="0 0 16 16"
+        >
           <path
-            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+          />
         </svg>
       </div>
     </div>
     <div class="col-md-1">
       <div class="icon icon-green" (click)="ok()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-          class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-          <path fill-rule="evenodd"
-            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="bi bi-arrow-right-circle"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
+          />
         </svg>
       </div>
     </div>
@@ -27,54 +42,86 @@
 <div class="nav-msg">
   <div class="card border-left-0 border-right-0">
     <div class="row">
-      <div class="col-md-3 primary" (click)="showHigh()">
-        <div class="card-body card-bg" [ngClass]="highFeedback ? 'cs-border' : ''">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-envelope-exclamation-fill" viewBox="0 0 16 16">
+      <div class="col-md-3 normal" (click)="showRequest()">
+        <div class="p-3 card-bg" [ngClass]="request ? 'cs-border' : ''">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-envelope-fill"
+            viewBox="0 0 16 16"
+          >
             <path
-              d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 4.697v4.974A4.491 4.491 0 0 0 12.5 8a4.49 4.49 0 0 0-1.965.45l-.338-.207L16 4.697Z" />
-            <path
-              d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1.5a.5.5 0 0 1-1 0V11a.5.5 0 0 1 1 0Zm0 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z" />
+              d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"
+            />
           </svg>
-          <span class="pl-3" (dblclick)="showHigh()">Primary </span>
+          <span class="pl-3" (dblclick)="showRequest()">Request </span>
         </div>
       </div>
-      <div class="col-md-3 normal" (click)="showNormal()">
-        <div class="card-body card-bg" [ngClass]="normalFeedback ? 'cs-border' : ''">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill"
-            viewBox="0 0 16 16">
+      <div class="col-md-3 primary" (click)="showReport()">
+        <div class="p-3 card-bg" [ngClass]="report ? 'cs-border' : ''">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-envelope-exclamation-fill"
+            viewBox="0 0 16 16"
+          >
             <path
-              d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+              d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 4.697v4.974A4.491 4.491 0 0 0 12.5 8a4.49 4.49 0 0 0-1.965.45l-.338-.207L16 4.697Z"
+            />
+            <path
+              d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1.5a.5.5 0 0 1-1 0V11a.5.5 0 0 1 1 0Zm0 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"
+            />
           </svg>
-          <span class="pl-3">Normal </span>
+
+          <span class="pl-3">Report </span>
         </div>
       </div>
     </div>
   </div>
 </div>
-<ng-container *ngIf="highFeedback">
-  <ng-container *ngFor="let item of highMessages">
-    <div class="msg-item" (mouseover)="showAction(item._id)" (mouseleave)="hideAction()" (dblclick)="msgItem(item._id)">
-      <div class="card border-left-0 border-right-0 border-top-0" [ngClass]="item.isOpen == false ? 'card-bg' : ''">
-        <div class="pr-3 pl-3 pt-3 pb-3">
+<ng-container *ngIf="request">
+  <ng-container *ngFor="let item of requestMessage">
+    <div
+      class="msg-item"
+      (mouseover)="showAction(item._id)"
+      (mouseleave)="hideAction()"
+      (dblclick)="msgItem(item._id)"
+    >
+      <div
+        class="card border-right-0 border-top-0"
+        [ngClass]="{
+          'red-border': item.feedbackLevel == 'High',
+          'blue-border': item.feedbackLevel == 'Medium',
+          'card-bg': item.isOpen
+        }"
+      >
+        <div class="pr-3 pl-3 pt-2 pb-2">
           <div class="row justify-content-around">
             <div class="col-md-2">
               <div class="custom-control custom-checkbox checkbox-lg">
-                <input type="checkbox" class="custom-control-input" id="{{ item._id }}" />
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="{{ item._id }}"
+                />
                 <label class="custom-control-label pl-2" for="{{ item._id }}">
                   <strong>
-                    <span *ngFor="let floor of item.feedbackLocation.floor; let key = index;">{{floor}}
-                      <span *ngIf="key != item.feedbackLocation.floor.length - 1">
-                        ,
-                      </span>
-                    </span>
+                    <span [ngClass]="{ normal: item.isOpen }"> Sivcheu </span>
                   </strong>
                 </label>
               </div>
             </div>
             <div class="col-md-7">
               <div class="b">
-                <strong>{{ item.title }}</strong>
+                <strong>
+                  <span [ngClass]="{ normal: item.isOpen }">
+                    {{ item.title }}
+                  </span>
+                </strong>
                 -
                 <span class="des">
                   {{ item.message }}
@@ -94,14 +141,18 @@
                   </div>
                 </div>
                 <div class="col-md-3">
-                  <div (click)="approvedMessage(item,item._id)">
+                  <div (click)="approvedMessage(item, item._id)">
                     <span class="badge badge-success select-all">Approve</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-3 text-right" *ngIf="messageID != item._id">
-              {{item.createdDate | date}}
+              <strong>
+                <span [ngClass]="{ normal: item.isOpen }">
+                  {{ item.createdDate | date }}
+                </span>
+              </strong>
             </div>
           </div>
         </div>
@@ -110,60 +161,85 @@
   </ng-container>
 </ng-container>
 
-<ng-container *ngIf="normalFeedback">
-  <ng-container *ngFor="let item of normalMessages">
-    <div class="msg-item" (mouseover)="showAction(item._id)" (mouseleave)="hideAction()">
-      <div class="card border-left-0 border-right-0 border-top-0">
-        <div class="pr-3 pl-3 pt-3 pb-3">
-          <div class="row justify-content-around">
-            <div class="col-md-2">
-              <div class="custom-control custom-checkbox checkbox-lg">
-                <input type="checkbox" class="custom-control-input" id="{{ item._id }}" />
-                <label class="custom-control-label pl-2" for="{{ item._id }}">
+<ng-container *ngIf="report">
+  <ng-container *ngFor="let item of reportMessage">
+    <ng-container [ngClass]="{ index: item.isOpen == false }">
+      <div
+        class="msg-item"
+        (mouseover)="showAction(item._id)"
+        (mouseleave)="hideAction()"
+      >
+        <div
+          class="card border-right-0 border-top-0"
+          [ngClass]="{
+            'red-border': item.feedbackLevel == 'High',
+            'blue-border': item.feedbackLevel == 'Medium',
+            'card-bg': item.isOpen == true
+          }"
+        >
+          <div class="pr-3 pl-3 pt-2 pb-2">
+            <div class="row justify-content-around">
+              <div class="col-md-2">
+                <div class="custom-control custom-checkbox checkbox-lg">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="{{ item._id }}"
+                  />
+                  <label class="custom-control-label pl-2" for="{{ item._id }}">
+                    <strong>
+                      <span [ngClass]="{ normal: item.isOpen }"> Sivcheu </span>
+                    </strong>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="b">
                   <strong>
-                    <span *ngFor="let floor of item.feedbackLocation.floor; let key = index;">{{floor}}
-                      <span *ngIf="key != item.feedbackLocation.floor.length - 1">
-                        ,
-                      </span>
+                    <span [ngClass]="{ normal: item.isOpen }">
+                      {{ item.title }}
                     </span>
                   </strong>
-                </label>
-              </div>
-            </div>
-            <div class="col-md-7">
-              <div class="b">
-                <strong>{{ item.title }}</strong>
-                -
-                <span class="des">
-                  {{ item.message }}
-                </span>
-              </div>
-            </div>
-            <div class="col-md-3" *ngIf="messageID == item._id">
-              <div class="row justify-content-end pr-3">
-                <div class="col-md-3">
-                  <div (click)="deleteMessage(item._id)">
-                    <span class="badge badge-secondary select-all">Delete</span>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div (click)="deleteMessage(item._id)">
-                    <span class="badge badge-danger select-all">Reject</span>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div (click)="approvedMessage(item,item._id)">
-                    <span class="badge badge-success select-all">Approve</span>
-                  </div>
+                  -
+                  <span class="des">
+                    {{ item.message }}
+                  </span>
                 </div>
               </div>
-            </div>
-            <div class="col-md-3 text-right" *ngIf="messageID != item._id">
-              {{item.createdDate | date}}
+              <div class="col-md-3" *ngIf="messageID == item._id">
+                <div class="row justify-content-end pr-3">
+                  <div class="col-md-3">
+                    <div (click)="deleteMessage(item._id)">
+                      <span class="badge badge-secondary select-all"
+                        >Delete</span
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div (click)="deleteMessage(item._id)">
+                      <span class="badge badge-danger select-all">Reject</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div (click)="approvedMessage(item, item._id)">
+                      <span class="badge badge-success select-all"
+                        >Approve</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 text-right" *ngIf="messageID != item._id">
+                <strong>
+                  <span [ngClass]="{ normal: item.isOpen }">
+                    {{ item.createdDate | date }}
+                  </span>
+                </strong>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </ng-container>
 </ng-container>

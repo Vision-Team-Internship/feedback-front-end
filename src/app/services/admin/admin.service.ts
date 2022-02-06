@@ -68,6 +68,12 @@ export class AdminService {
   private completedMessageApiUrl =
     'https://feedback-project-api.herokuapp.com/api/v1/completeds';
 
+  private requestMessageApiUrl =
+    'https://feedback-project-api.herokuapp.com/api/v1/feedbacks?type=request';
+
+  private reportMessageApiUrl =
+    'https://feedback-project-api.herokuapp.com/api/v1/feedbacks?type=report';
+
   user!: User;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -75,11 +81,17 @@ export class AdminService {
       this.user = this.getToken(String(localStorage.getItem('token')));
     }
   }
+  getReportMessage() {
+    return this.http.get<Message[]>(this.reportMessageApiUrl, httpOption);
+  }
+  getRequestMessage() {
+    return this.http.get<Message[]>(this.requestMessageApiUrl, httpOption);
+  }
 
   getToken(tokenRaw: string) {
     let playload = tokenRaw.split('.')[1];
     let decode = atob(playload);
-    let token = JSON.parse(decode)
+    let token = JSON.parse(decode);
 
     return token as User;
   }
