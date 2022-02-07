@@ -69,10 +69,10 @@ export class AdminService {
     'https://feedback-project-api.herokuapp.com/api/v1/completeds';
 
   private requestMessageApiUrl =
-    'https://feedback-project-api.herokuapp.com/api/v1/feedbacks?type=request';
+    'https://feedback-project-api.herokuapp.com/api/v1/feedbacks?type=request&isApproved=false&isRejected=false';
 
   private reportMessageApiUrl =
-    'https://feedback-project-api.herokuapp.com/api/v1/feedbacks?type=report';
+    'https://feedback-project-api.herokuapp.com/api/v1/feedbacks?type=report&isApproved=false&isRejected=false';
 
   user!: User;
 

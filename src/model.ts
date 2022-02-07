@@ -64,6 +64,7 @@ export interface Message {
   url: string;
   isOpen: boolean;
   type: string;
+  reporter_id: User;
 }
 export interface UpdateMessage {
   note: string;
@@ -79,5 +80,5 @@ export interface User {
   email: string;
   password: string;
   phone: string;
-  cardID: string
+  cardID: string;
 }

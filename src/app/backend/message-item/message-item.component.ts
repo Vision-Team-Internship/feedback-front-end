@@ -15,7 +15,7 @@ export class MessageItemComponent implements OnInit {
   ) {}
 
   messageID: string = '';
-  messageData: any = '';
+  messageData!: Message;
   userData: any = this.adminService.user;
 
   ngOnInit(): void {

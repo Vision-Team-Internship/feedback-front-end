@@ -67,7 +67,9 @@
               />
               <label class="custom-control-label pl-2" for="{{ item._id }}">
                 <strong>
-                  <span [ngClass]="{ normal: item.isOpen }"> Sivcheu </span>
+                  <span [ngClass]="{ normal: item.isOpen }">
+                    {{ item.reporter_id.username }}
+                  </span>
                 </strong>
               </label>
             </div>
