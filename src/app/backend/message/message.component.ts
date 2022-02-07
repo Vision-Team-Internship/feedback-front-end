@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { Message, UpdateMessage } from 'src/model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-message',
@@ -10,20 +11,22 @@ import { Message, UpdateMessage } from 'src/model';
   styleUrls: ['./message.component.css'],
 })
 export class MessageComponent implements OnInit {
+  constructor(
+    private messageService: AdminService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
+
   requestMessage: Message[] = [];
   reportMessage: Message[] = [];
-
   location: string[] = [];
   displayActionBtn = false;
   messageID: string = '';
   request = true;
   report = false;
   approvedForm!: FormGroup;
-  constructor(
-    private messageService: AdminService,
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+  checks = false;
+  disabled = true;
 
   ngOnInit(): void {
     this.messageService.getRequestMessage().subscribe((data: any) => {
@@ -78,17 +81,51 @@ export class MessageComponent implements OnInit {
       console.log(res);
     });
   }
+
   showReport() {
     this.report = true;
     this.request = false;
+    this.checks = false;
   }
+
   showRequest() {
     this.request = true;
     this.report = false;
+    this.checks = false;
   }
+
   msgItem(msg_ID: string) {
     this.router.navigate(['/d/msg', msg_ID]);
   }
+
+  selectAll() {
+    this.checks = !this.checks;
+  }
+
+  reload() {
+    this.approvedForm = this.fb.group({
+      _id: [''],
+    });
+    Swal.fire({
+      position: 'top-end',
+      title: 'Loading...',
+      showConfirmButton: false,
+      timer: 500,
+      width: 220,
+    });
+    if (this.request) {
+      this.messageService.getRequestMessage().subscribe((data: any) => {
+        console.log('Request Message', data.payload);
+        this.requestMessage = data.payload;
+      });
+    } else {
+      this.messageService.getReportMessage().subscribe((data: any) => {
+        console.log('Report Message', data.payload);
+        this.reportMessage = data.payload;
+      });
+    }
+  }
+
   ok() {
     console.log('ok');
     alert('ok');

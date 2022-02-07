@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { Message, UpdateMessage } from 'src/model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-all-feedback',
@@ -10,14 +11,17 @@ import { Message, UpdateMessage } from 'src/model';
   styleUrls: ['./all-feedback.component.css'],
 })
 export class AllFeedbackComponent implements OnInit {
-  messages: Message[] = [];
-  messageID: string = '';
-  approvedForm!: FormGroup;
   constructor(
     private messageService: AdminService,
     private fb: FormBuilder,
     private router: Router
   ) {}
+
+  messages: Message[] = [];
+  messageID: string = '';
+  approvedForm!: FormGroup;
+  checks = false;
+  disabled = true;
 
   ngOnInit(): void {
     this.messageService.getAllMessage().subscribe((data: any) => {
@@ -28,9 +32,11 @@ export class AllFeedbackComponent implements OnInit {
       _id: [''],
     });
   }
+
   get f() {
     return this.approvedForm.controls;
   }
+
   approvedMessage(data: any, id: string) {
     this.f._id.setValue(data._id);
 
@@ -54,12 +60,32 @@ export class AllFeedbackComponent implements OnInit {
   msgItem(msg_ID: string) {
     this.router.navigate(['/d/all-msg', msg_ID]);
   }
-  ok() {
-    alert('ok');
+
+  selectAll() {
+    this.checks = !this.checks;
   }
+
+  reload() {
+    this.approvedForm = this.fb.group({
+      _id: [''],
+    });
+    Swal.fire({
+      position: 'top-end',
+      title: 'Loading...',
+      showConfirmButton: false,
+      timer: 500,
+      width: 220,
+    });
+    this.messageService.getAllMessage().subscribe((data: any) => {
+      console.log('All Messages', data.payload);
+      this.messages = data.payload;
+    });
+  }
+
   showAction(id: string) {
     this.messageID = id;
   }
+
   hideAction() {
     this.messageID = '';
   }

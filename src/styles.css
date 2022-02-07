@@ -323,12 +323,12 @@ div.a {
 .red-border {
   margin-top: 1px;
   margin-bottom: 1px;
-  border-left: 5px solid #d93025;
+  border-left: 4px solid #d93025;
 }
 .blue-border {
   margin-top: 1px;
   margin-bottom: 1px;
-  border-left: 5px solid #1a73e8;
+  border-left: 4px solid #1a73e8;
 }
 .floor {
   height: 335px;
@@ -356,6 +356,22 @@ strong .normal {
   font-weight: normal;
   font-size: 14px;
 }
-.index {
-  z-index: 2;
+
+.custom-control-input:disabled ~ .custom-control-label,
+.custom-control-input[disabled] ~ .custom-control-label {
+  color: black;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #007bff;
+  background-color: #007bff;
+}
+.custom-checkbox
+  .custom-control-input:disabled:checked
+  ~ .custom-control-label::before {
+  background-color: #007bff;
+}
+.custom-control-input:disabled ~ .custom-control-label::before,
+.custom-control-input[disabled] ~ .custom-control-label::before {
+  background-color: white;
 }

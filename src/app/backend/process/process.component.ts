@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { Message, UpdateMessage } from 'src/model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-process',
@@ -10,15 +11,17 @@ import { Message, UpdateMessage } from 'src/model';
   styleUrls: ['./process.component.css'],
 })
 export class ProcessComponent implements OnInit {
-  inProcessMessage: Message[] = [];
-  messageID: string = '';
-  completeMessageForm!: FormGroup;
-
   constructor(
     private adminService: AdminService,
     private fb: FormBuilder,
     private router: Router
   ) {}
+
+  inProcessMessage: Message[] = [];
+  messageID: string = '';
+  completeMessageForm!: FormGroup;
+  checks = false;
+  disabled = true;
 
   ngOnInit(): void {
     this.adminService.getInProccessMessage().subscribe((data: any) => {
@@ -57,15 +60,40 @@ export class ProcessComponent implements OnInit {
       console.log(res);
     });
   }
+
   msgItem(msg_ID: string) {
     this.router.navigate(['/d/msg-process', msg_ID]);
   }
+
+  selectAll() {
+    this.checks = !this.checks;
+  }
+
+  reload() {
+    Swal.fire({
+      position: 'top-end',
+      title: 'Loading...',
+      showConfirmButton: false,
+      timer: 500,
+      width: 220,
+    });
+    this.adminService.getInProccessMessage().subscribe((data: any) => {
+      console.log('In Processing', data.payload);
+      this.inProcessMessage = data.payload;
+    });
+    this.completeMessageForm = this.fb.group({
+      _id: [''],
+    });
+  }
+
   ok() {
     alert('ok');
   }
+
   showAction(id: string) {
     this.messageID = id;
   }
+
   hideAction() {
     this.messageID = '';
   }
