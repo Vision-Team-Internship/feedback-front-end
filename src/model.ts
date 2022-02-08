@@ -22,6 +22,7 @@ export interface SendMessage {
   feedbackType: string;
   uniqueIDs: string[];
   type: string;
+  url: any;
 }
 
 export interface MSG {

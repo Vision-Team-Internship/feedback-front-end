@@ -10,7 +10,7 @@ import { Department, Floor, Room, SendMessage } from 'src/model';
 })
 export class FormComponent implements OnInit {
   constructor(private service: Service, private fb: FormBuilder) {}
-
+  imageSrc: string | undefined;
   submitForm: FormGroup = new FormGroup({});
   floors: Floor[] = [];
   departments: Department[] = [];
@@ -40,6 +40,7 @@ export class FormComponent implements OnInit {
       floor_id: new FormControl(''),
       room_id: new FormControl(''),
       department_id: new FormControl(''),
+      url: new FormControl(''),
     });
   }
 
@@ -61,6 +62,24 @@ export class FormComponent implements OnInit {
     this.submitForm.controls['floor_id'].setValue(id);
     this.submitForm.controls['department_id'].setValue('');
   }
+
+  onFileSelect(event: any) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+
+        this.submitForm.patchValue({
+          url: reader.result,
+        });
+      };
+    }
+  }
+
   sendMessage(): void {
     let feedBackType = '';
     let uniqueIDs = [''];
@@ -76,8 +95,6 @@ export class FormComponent implements OnInit {
         }
       }
     }
-    console.log(this.submitForm.value);
-
     const data: SendMessage = {
       title: this.submitForm.controls['title'].value,
       message: this.submitForm.controls['message'].value,
@@ -85,8 +102,11 @@ export class FormComponent implements OnInit {
       feedbackType: feedBackType,
       uniqueIDs: uniqueIDs,
       type: 'report',
+      url: this.submitForm.controls['url'].value,
     };
+
     console.log(data);
+
     this.service.sendMessage(data).subscribe(
       (response) => {
         console.log(response);

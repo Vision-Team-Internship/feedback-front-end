@@ -16,7 +16,7 @@ export class AuthComponent implements OnInit {
     private auth: AdminService,
     private fb: FormBuilder,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (this.auth.loggedIn()) {
