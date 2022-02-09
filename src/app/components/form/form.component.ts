@@ -72,10 +72,7 @@ export class FormComponent implements OnInit {
 
       reader.onload = () => {
         this.imageSrc = reader.result as string;
-
-        this.submitForm.patchValue({
-          url: reader.result,
-        });
+        this.submitForm.get('url')?.setValue(reader);
       };
     }
   }
