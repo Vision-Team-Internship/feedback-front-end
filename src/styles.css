@@ -375,3 +375,8 @@ strong .normal {
 .custom-control-input[disabled] ~ .custom-control-label::before {
   background-color: white;
 }
+.form img {
+  width: 500px;
+  object-fit: contain;
+  border-radius: 5px;
+}

@@ -2,8 +2,8 @@
 <div class="container">
   <div class="pt-3 pb-4">
     <ng-container *ngIf="!submitted">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
+      <div class="row justify-content-center">
+        <div class="col-md-7">
           <div class="card cs-shadow border-0">
             <div class="card-header">
               <strong>Request Form</strong>
@@ -12,20 +12,24 @@
               <form [formGroup]="requestForm" (submit)="sendRequest()"
                 onsubmit="myButton.disabled = true; return true;">
                 <div class="form-group">
-                  <label for="Request-title">Title</label>
-                  <input type="text" class="form-control " id="Request-title" formControlName="title" />
+                  <label for="Request-title">
+                    <strong>Title</strong>
+                  </label>
+                  <input type="text" class="form-control form-control-lg" id="Request-title" formControlName="title" />
                   <small id="emailHelp" class="form-text text-muted">
                     Request anything you want
                   </small>
                 </div>
                 <div class="form-group">
-                  <label for="Request-message">Tell us why</label>
-                  <textarea id="Request-message" rows="4" class="form-control" formControlName="message"></textarea>
+                  <label for="Request-message">
+                    <strong>Tell us why!</strong>
+                  </label>
+                  <textarea id="Request-message" rows="5" class="form-control" formControlName="message"></textarea>
 
                   <small id="emailHelp" class="form-text text-muted">
                     Our response will send to email:
                     <strong>
-                      {{data.email}}
+                      {{ data.email }}
                     </strong>
                   </small>
                 </div>

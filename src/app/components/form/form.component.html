@@ -1,37 +1,173 @@
 <app-navbar></app-navbar>
 
+<div class="container form">
+  <div class="pt-3">
+    <div *ngIf="!submitted">
+      <form [formGroup]="submitForm" (submit)="sendMessage()" onsubmit="myButton.disabled = true; return true;">
+        <div class="row justify-content-center">
+          <div class="col-md-7">
+            <div class="card border-0 cs-shadow">
+              <div class="card-body">
+                <h5 style="color: rgb(216, 25, 25)">Report Form</h5>
+                <hr />
+                <div class="pb-3">
+                  <div class="pb-2">
+                    <strong>Location</strong>
+                  </div>
+                  <div class="list-group floor" id="list-tab" role="tablist">
+                    <ng-container *ngFor="let item of floors; let key = index">
+                      <a class="list-group-item list-group-item-action" (click)="getFloorID(item._id)"
+                        [ngClass]="floorID == item._id ? 'active' : ''" href="javascript:void(0)">
+                        <div>
+                          {{ item.name }}
+                        </div>
+                      </a>
+                    </ng-container>
+                  </div>
+                </div>
+                <ng-container *ngIf="floorID">
+                  <div class="pb-3">
+                    <div class="pb-2">
+                      <strong>Department</strong>
+                    </div>
+                    <div class="list-group" id="list-tab" role="tablist">
+                      <ng-container *ngFor="let item of departments; let key = index">
+                        <ng-container *ngIf="floorID == item.floor_id">
+                          <a class="list-group-item list-group-item-action" (click)="getDepartmentID(item._id)"
+                            [ngClass]="departmentID == item._id ? 'active' : ''" href="javascript:void(0)">
+                            <div>
+                              {{ item.name }}
+                            </div>
+                          </a>
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="departmentID">
+                  <div class="pb-3">
+                    <div class="pb-2">
+                      <strong>Room</strong>
+                    </div>
+                    <div class="list-group" id="list-tab" role="tablist">
+                      <ng-container *ngFor="let item of rooms; let key = index">
+                        <ng-container *ngIf="departmentID == item.department_id">
+                          <a class="list-group-item list-group-item-action" (click)="getRoomID(item._id)"
+                            [ngClass]="roomID == item._id ? 'active' : ''" href="javascript:void(0)">
+                            <div>Room {{ item.name }}</div>
+                          </a>
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-container>
+                <div class="pb-3">
+                  <div class="pb-2">
+                    <strong>Tell us why!</strong>
+                  </div>
+                  <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="Title" formControlName="title" required />
+                  </div>
+                  <div class="mb-2">
+                    <textarea name="" id="" rows="4" class="form-control" placeholder="Message"
+                      formControlName="message" required></textarea>
+                    <small class="text-muted">
+                      Please feel free to send us your feedback or request about
+                      our services so far, Make sure to include hopes, fears,
+                      expectation
+                    </small>
+                  </div>
+                </div>
+
+                <div class="pb-3">
+                  <div class="mb-1">
+                    <label class="form-check-label">
+                      <strong>Situation</strong>
+                    </label>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-check form-check-inline">
+                        <input formControlName="feedbackLevel" class="form-check-input" type="radio"
+                          name="feedbackLevel" id="High" value="High" required />
+                        <label class="form-check-label text-danger" for="High">Priority</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-check form-check-inline">
+                        <input formControlName="feedbackLevel" class="form-check-input" type="radio"
+                          name="feedbackLevel" id="Normal" value="Medium" required />
+                        <label class="form-check-label text-primary" for="Normal">Normal</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pb-3">
+                  <div class="pb-2">
+                    <div class="mb-1">
+                      <label class="form-check-label">
+                        <strong> Picture </strong>
+                      </label>
+                    </div>
+                    <input type="file" name="url" (change)="onFileSelect($event)" />
+                    <img [src]="imageSrc" *ngIf="imageSrc" />
+                    <!-- <div (click)="removeImage()">
+                      <button type="button">
+                        remove
+                      </button>
+                    </div> -->
+                  </div>
+                </div>
+                <button name="myButton" type="submit" class="btn btn-primary col-12">
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf=" submitted">
+      <div class="row justify-content-center">
+        <div class="col-md-7">
+          <div class="card border-0 cs-shadow">
+            <div class="card-body">
+              <div class="p-4">
+                <h2>VFeedBack</h2>
+                <p class="pt-3 pb-2">Your response has been recorded</p>
+                <a (click)="newMsg()" href="javascript:void(0)">
+                  Submit another response
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
 <div class="container">
   <div class="pt-3 pb-4">
     <div *ngIf="!submitted">
       <div class="card border-0 cs-shadow">
         <div class="card-body">
           <h5 class="pb-3" style="color: rgb(216, 25, 25)">Report Form</h5>
-          <form
-            [formGroup]="submitForm"
-            (submit)="sendMessage()"
-            onsubmit="myButton.disabled = true; return true;"
-          >
+          <form [formGroup]="submitForm" (submit)="sendMessage()" onsubmit="myButton.disabled = true; return true;">
             <div class="row">
-              <div
-                class="mb-3"
-                [ngClass]="{
+              <div class="mb-3" [ngClass]="{
                   'col-md-6': !floorID,
                   'col-md-4': floorID && !departmentID,
                   'col-md-3': departmentID && floorID
-                }"
-              >
+                }">
                 <div class="d-flex justify-content-between pb-2">
                   <strong><label>Choose The Floor</label></strong>
                   <small class="text-danger">Required</small>
                 </div>
                 <div class="list-group floor" id="list-tab" role="tablist">
                   <ng-container *ngFor="let item of floors; let key = index">
-                    <a
-                      class="list-group-item list-group-item-action"
-                      (click)="getFloorID(item._id)"
-                      [ngClass]="floorID == item._id ? 'active' : ''"
-                      href="javascript:void(0)"
-                    >
+                    <a class="list-group-item list-group-item-action" (click)="getFloorID(item._id)"
+                      [ngClass]="floorID == item._id ? 'active' : ''" href="javascript:void(0)">
                       <div>
                         {{ item.name }}
                       </div>
@@ -40,28 +176,19 @@
                 </div>
               </div>
               <ng-container *ngIf="floorID">
-                <div
-                  class="mb-3"
-                  [ngClass]="{
+                <div class="mb-3" [ngClass]="{
                     'col-md-4': floorID && !departmentID,
                     'col-md-3': departmentID && floorID
-                  }"
-                >
+                  }">
                   <div class="d-flex justify-content-between pb-2">
                     <strong><label>Choose The Department</label></strong>
                     <small class="text-muted">Optional</small>
                   </div>
                   <div class="list-group" id="list-tab" role="tablist">
-                    <ng-container
-                      *ngFor="let item of departments; let key = index"
-                    >
+                    <ng-container *ngFor="let item of departments; let key = index">
                       <ng-container *ngIf="floorID == item.floor_id">
-                        <a
-                          class="list-group-item list-group-item-action"
-                          (click)="getDepartmentID(item._id)"
-                          [ngClass]="departmentID == item._id ? 'active' : ''"
-                          href="javascript:void(0)"
-                        >
+                        <a class="list-group-item list-group-item-action" (click)="getDepartmentID(item._id)"
+                          [ngClass]="departmentID == item._id ? 'active' : ''" href="javascript:void(0)">
                           <div>
                             {{ item.name }}
                           </div>
@@ -80,12 +207,8 @@
                   <div class="list-group" id="list-tab" role="tablist">
                     <ng-container *ngFor="let item of rooms; let key = index">
                       <ng-container *ngIf="departmentID == item.department_id">
-                        <a
-                          class="list-group-item list-group-item-action"
-                          (click)="getRoomID(item._id)"
-                          [ngClass]="roomID == item._id ? 'active' : ''"
-                          href="javascript:void(0)"
-                        >
+                        <a class="list-group-item list-group-item-action" (click)="getRoomID(item._id)"
+                          [ngClass]="roomID == item._id ? 'active' : ''" href="javascript:void(0)">
                           <div>Room {{ item.name }}</div>
                         </a>
                       </ng-container>
@@ -93,104 +216,15 @@
                   </div>
                 </div>
               </ng-container>
-              <div
-                [ngClass]="{
+              <div [ngClass]="{
                   'col-md-6': !floorID,
                   'col-md-4': floorID && !departmentID,
                   'col-md-3': departmentID && floorID
-                }"
-              >
+                }">
                 <div class="d-flex justify-content-between pb-2">
                   <strong><label>Tell us why!</label></strong>
                   <small class="text-danger">Required</small>
                 </div>
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Title"
-                    formControlName="title"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <textarea
-                    name=""
-                    id=""
-                    rows="4"
-                    class="form-control"
-                    placeholder="Message"
-                    formControlName="message"
-                    required
-                  ></textarea>
-                  <small class="text-muted">
-                    Please feel free to send us your feedback or request about
-                    our services so far, Make sure to include hopes, fears,
-                    expectation
-                  </small>
-                </div>
-                <div class="mb-3">
-                  <div class="pb-1">
-                    <label class="form-check-label"> Situation </label>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-check form-check-inline">
-                        <input
-                          formControlName="feedbackLevel"
-                          class="form-check-input"
-                          type="radio"
-                          name="feedbackLevel"
-                          id="High"
-                          value="High"
-                          required
-                        />
-                        <label class="form-check-label text-danger" for="High"
-                          >Priority</label
-                        >
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-check form-check-inline">
-                        <input
-                          formControlName="feedbackLevel"
-                          class="form-check-input"
-                          type="radio"
-                          name="feedbackLevel"
-                          id="Normal"
-                          value="Medium"
-                          required
-                        />
-                        <label
-                          class="form-check-label text-primary"
-                          for="Normal"
-                          >Normal</label
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <input
-                    type="file"
-                    name="url"
-                    (change)="onFileSelect($event)"
-                  />
-                </div>
-                <img
-                  [src]="imageSrc"
-                  *ngIf="imageSrc"
-                  style="height: 300px; width: 500px"
-                />
-                <button
-                  name="myButton"
-                  type="submit"
-                  class="btn btn-primary col-12"
-                  [disabled]="!submitForm.valid || !floorID"
-                >
-                  Send
-                </button>
               </div>
             </div>
           </form>

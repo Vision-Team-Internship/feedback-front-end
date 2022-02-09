@@ -13,7 +13,7 @@ const httpOption = {
   providedIn: 'root',
 })
 export class Service {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private roomApi = '//feedback-project-api.herokuapp.com/api/v1/rooms';
   private floorApi = 'https://feedback-project-api.herokuapp.com/api/v1/floors';
