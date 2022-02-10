@@ -5,22 +5,13 @@
       <div class="card-body">
         <div class="row d-flex align-items-center">
           <div class="col-md-4 text-center">
-            <!-- <img
-              src="https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-6/270016818_1270000453409784_300102500313754755_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeHrd-6MzCuqM-DEicBCn25I74cgEZEsK07vhyARkSwrTj0NBJ5pSEKJcZAFDTzqQtpjEBmjEmwF6CP-KenlT7ky&_nc_ohc=B4WSj6Hl5zkAX-jVuBf&_nc_ht=scontent.fpnh24-1.fna&oh=00_AT-WamU_ljF40YkJInH583DuoO51TvpdopCkvJi_oezyMQ&oe=61F936AA"
-              alt="" /> -->
+            <img src="{{user.avatar}}" alt="" />
             <div class="btn camera">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="30"
-                fill="currentColor"
-                class="bi bi-camera-fill"
-                viewBox="0 0 16 16"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" fill="currentColor"
+                class="bi bi-camera-fill" viewBox="0 0 16 16">
                 <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
                 <path
-                  d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"
-                />
+                  d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z" />
               </svg>
             </div>
           </div>
@@ -28,13 +19,13 @@
             <div class="row pb-2">
               <div class="col-md-4">Full Name</div>
               <div class="col-md-8 justify-content-start">
-                <strong>{{ userData.username }}</strong>
+                <strong>{{ user.username }}</strong>
               </div>
             </div>
             <div class="row pb-2">
               <div class="col-md-4">Email</div>
               <div class="col-md-8 justify-content-start">
-                <strong>{{ userData.email }}</strong>
+                <strong>{{ user.email }}</strong>
               </div>
             </div>
             <div class="row pb-2">
@@ -46,7 +37,7 @@
             <div class="row pb-2">
               <div class="col-md-4">Role:</div>
               <div class="col-md-8 justify-content-start">
-                <strong>{{ userData.role }}</strong>
+                <strong>{{ user.role }}</strong>
               </div>
             </div>
           </div>
@@ -55,20 +46,11 @@
           <a (click)="logout()" style="cursor: pointer">
             <div>
               <span class="pl-3 pr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  class="bi bi-door-open"
-                  viewBox="0 0 16 16"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                  class="bi bi-door-open" viewBox="0 0 16 16">
+                  <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
                   <path
-                    d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"
-                  />
-                  <path
-                    d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"
-                  />
+                    d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z" />
                 </svg>
               </span>
               <span>Log Out</span>
@@ -82,6 +64,7 @@
 <style>
   img {
     height: 200px;
+    width: 200px;
     object-fit: cover;
     border-radius: 50%;
   }

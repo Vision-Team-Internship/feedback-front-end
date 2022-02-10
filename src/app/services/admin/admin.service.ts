@@ -74,6 +74,8 @@ export class AdminService {
   private reportMessageApiUrl =
     'https://feedback-project-api.herokuapp.com/api/v1/feedbacks?type=report&isApproved=false&isRejected=false';
 
+  private userApiUrl = 'https://feedback-project-api.herokuapp.com/api/v1/users'
+
   user!: User;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -81,6 +83,11 @@ export class AdminService {
       this.user = this.getToken(String(localStorage.getItem('token')));
     }
   }
+
+  getUserDetail(id: string): Observable<User> {
+    return this.http.get<User>(`${this.userApiUrl}/${id}`, httpOption)
+  }
+
   getReportMessage() {
     return this.http.get<Message[]>(this.reportMessageApiUrl, httpOption);
   }

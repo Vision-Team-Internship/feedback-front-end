@@ -36,7 +36,7 @@ export class Service {
     return this.http.get<Room[]>(this.roomApi);
   }
 
-  public sendMessage(data: SendMessage): Observable<any> {
+  public sendMessage(data: any): Observable<any> {
     return this.http.post(this.messageApi, data, httpOption);
   }
 

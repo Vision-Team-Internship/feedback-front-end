@@ -13,7 +13,7 @@ export class RequestFormComponent implements OnInit {
     private adminService: AdminService,
     private fb: FormBuilder,
     private service: Service
-  ) {}
+  ) { }
 
   requestForm: FormGroup = new FormGroup({});
   data: any = this.adminService.user;

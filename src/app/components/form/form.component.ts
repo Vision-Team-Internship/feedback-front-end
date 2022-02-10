@@ -64,17 +64,16 @@ export class FormComponent implements OnInit {
   }
 
   onFileSelect(event: any) {
-    const reader = new FileReader();
+    const file = event.target.files[0];
+    this.submitForm.controls['url'].setValue(file);
+    // const formData = new FormData();
+    // formData.append('url', this.submitForm.get('url')?.value);
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
+    // console.log(JSON.stringify(formData));
 
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
-        this.submitForm.get('url')?.setValue(reader);
-      };
-    }
+    // formData.forEach((value, key) => {
+    //   console.log(key + ' ' + value);
+    // });
   }
 
   sendMessage(): void {
@@ -92,19 +91,36 @@ export class FormComponent implements OnInit {
         }
       }
     }
-    const data: SendMessage = {
-      title: this.submitForm.controls['title'].value,
-      message: this.submitForm.controls['message'].value,
-      feedbackLevel: this.submitForm.controls['feedbackLevel'].value,
-      feedbackType: feedBackType,
-      uniqueIDs: uniqueIDs,
-      type: 'report',
-      url: this.submitForm.controls['url'].value,
-    };
 
-    console.log(data);
+    // const data: SendMessage = {
+    //   title: this.submitForm.controls['title'].value,
+    //   message: this.submitForm.controls['message'].value,
+    //   feedbackLevel: this.submitForm.controls['feedbackLevel'].value,
+    //   feedbackType: feedBackType,
+    //   uniqueIDs: uniqueIDs,
+    //   type: 'report',
+    //   url: this.submitForm.controls['url'].value,
+    // };
 
-    this.service.sendMessage(data).subscribe(
+    // console.log(data);
+
+    const formData = new FormData();
+
+    formData.append('title', this.submitForm.get('title')?.value);
+    formData.append('message', this.submitForm.get('message')?.value);
+    formData.append(
+      'feedbackLevel',
+      this.submitForm.get('feedbackLevel')?.value
+    );
+    formData.append('feedbackType', this.submitForm.get('feedbackType')?.value);
+    formData.append('uniqueIDs', this.submitForm.get('uniqueIDs')?.value);
+    formData.append('type', 'report');
+    formData.append('url', this.submitForm.get('url')?.value);
+    formData.forEach((value, key) => {
+      console.log(key + ' ' + value);
+    });
+
+    this.service.sendMessage(formData).subscribe(
       (response) => {
         console.log(response);
         this.submitted = true;
