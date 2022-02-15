@@ -10,20 +10,19 @@ import { Floor } from 'src/model';
   styleUrls: ['./home-floor-item.component.css'],
 })
 export class HomeFloorItemComponent implements OnInit {
-  floorID: any;
-  floorData: Floor | any;
-  submitForm: FormGroup = new FormGroup({});
-  submitted = false;
-  newMsg(): void {
-    this.submitted = false;
-    this.submitForm.reset();
-  }
-
   constructor(
     private service: Service,
     private actRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) { }
+  ) {}
+
+  floorID: any;
+  floorData: Floor | any;
+  submitForm: FormGroup = new FormGroup({});
+  submitted = false;
+  imageSrc: any;
+  file: any = '';
+  fileName: any = '';
 
   ngOnInit(): void {
     this.floorID = this.actRoute.snapshot.params['id'];
@@ -36,21 +35,36 @@ export class HomeFloorItemComponent implements OnInit {
       message: new FormControl(''),
       feedbackLevel: new FormControl(''),
       floor_id: new FormControl(''),
+      url: new FormControl(''),
     });
   }
 
-  sendMessage(): void {
-    const data: any = {
-      title: this.submitForm.controls['title'].value,
-      message: this.submitForm.controls['message'].value,
-      feedbackLevel: this.submitForm.controls['feedbackLevel'].value,
-      feedbackType: 'floor',
-      uniqueIDs: [this.floorID],
-      type: 'report'
+  onFileSelect(event: any) {
+    const file = event.target.files[0];
+    this.file = file;
+    this.fileName = file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageSrc = reader.result;
     };
-    console.log(this.submitForm.value);
-    console.log(data);
-    this.service.sendMessage(data).subscribe(
+    reader.readAsDataURL(file);
+  }
+
+  sendMessage(): void {
+    const formData = new FormData();
+
+    formData.append('url', this.file);
+    formData.append('title', this.submitForm.controls['title'].value);
+    formData.append('message', this.submitForm.controls['message'].value);
+    formData.append(
+      'feedbackLevel',
+      this.submitForm.controls['feedbackLevel'].value
+    );
+    formData.append('feedbackType', 'floor');
+    formData.append('uniqueIDs', this.floorID);
+    formData.append('type', 'report');
+
+    this.service.sendMessage(formData).subscribe(
       (response) => {
         console.log(response);
         this.submitted = true;
@@ -59,5 +73,11 @@ export class HomeFloorItemComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  newMsg(): void {
+    this.submitted = false;
+    this.imageSrc = '';
+    this.submitForm.reset();
   }
 }

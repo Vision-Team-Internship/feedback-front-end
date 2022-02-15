@@ -9,8 +9,8 @@ import { Department, Floor, Room, SendMessage } from 'src/model';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-  constructor(private service: Service, private fb: FormBuilder) { }
-  imageSrc: string | undefined;
+  constructor(private service: Service, private fb: FormBuilder) {}
+
   submitForm: FormGroup = new FormGroup({});
   floors: Floor[] = [];
   departments: Department[] = [];
@@ -19,6 +19,9 @@ export class FormComponent implements OnInit {
   floorID: string | undefined = '';
   departmentID: string | undefined = '';
   roomID: string | undefined = '';
+  imageSrc: any;
+  file: any = '';
+  fileName: any = '';
 
   ngOnInit(): void {
     this.service.getfloor().subscribe((data: any) => {
@@ -45,18 +48,17 @@ export class FormComponent implements OnInit {
   }
 
   getRoomID(id: any) {
-    console.log('RoomID', id);
     this.roomID = id;
     this.submitForm.controls['room_id'].setValue(id);
   }
+
   getDepartmentID(id: any) {
-    console.log('DepartmentID', id);
     this.departmentID = id;
     this.submitForm.controls['department_id'].setValue(id);
     this.submitForm.controls['room_id'].setValue('');
   }
+
   getFloorID(id: any) {
-    console.log(id);
     this.floorID = id;
     this.departmentID = '';
     this.submitForm.controls['floor_id'].setValue(id);
@@ -65,37 +67,44 @@ export class FormComponent implements OnInit {
 
   onFileSelect(event: any) {
     const file = event.target.files[0];
-    this.submitForm.controls['url'].setValue(file);
+    this.file = file;
+    this.fileName = file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageSrc = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   sendMessage(): void {
     let feedBackType = '';
-    let uniqueIDs = [''];
+    let uniqueIDs = '';
     if (this.submitForm.controls['floor_id'].value != '') {
       feedBackType = 'floor';
-      uniqueIDs = [this.submitForm.controls['floor_id'].value];
+      uniqueIDs = this.submitForm.controls['floor_id'].value;
       if (this.submitForm.controls['department_id'].value != '') {
         feedBackType = 'department';
-        uniqueIDs = [this.submitForm.controls['department_id'].value];
+        uniqueIDs = this.submitForm.controls['department_id'].value;
         if (this.submitForm.controls['room_id'].value != '') {
-          uniqueIDs = [this.submitForm.controls['room_id'].value];
+          uniqueIDs = this.submitForm.controls['room_id'].value;
           feedBackType = 'room';
         }
       }
     }
+    const formData = new FormData();
 
-    const data: SendMessage = {
-      title: this.submitForm.controls['title'].value,
-      message: this.submitForm.controls['message'].value,
-      feedbackLevel: this.submitForm.controls['feedbackLevel'].value,
-      feedbackType: feedBackType,
-      uniqueIDs: uniqueIDs,
-      type: 'report',
-      url: this.submitForm.controls['url'].value,
-    };
-    console.log(data);
+    formData.append('url', this.file);
+    formData.append('feedbackType', feedBackType);
+    formData.append('title', this.submitForm.controls['title'].value);
+    formData.append('message', this.submitForm.controls['message'].value);
+    formData.append(
+      'feedbackLevel',
+      this.submitForm.controls['feedbackLevel'].value
+    );
+    formData.append('uniqueIDs', uniqueIDs);
+    formData.append('type', 'report');
 
-    this.service.sendMessage(data).subscribe(
+    this.service.sendMessage(formData).subscribe(
       (response) => {
         console.log(response);
         this.submitted = true;
@@ -110,6 +119,7 @@ export class FormComponent implements OnInit {
 
   newMsg(): void {
     this.submitted = false;
+    this.imageSrc = '';
     this.submitForm.reset();
   }
 }

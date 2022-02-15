@@ -9,7 +9,9 @@ import { Floor } from 'src/model';
 })
 export class HomeFloorComponent implements OnInit {
   constructor(private service: Service) {}
+
   floors: Floor[] = [];
+
   ngOnInit(): void {
     this.service.getfloor().subscribe((data: any) => {
       console.log(data);

@@ -13,32 +13,51 @@ export class RequestFormComponent implements OnInit {
     private adminService: AdminService,
     private fb: FormBuilder,
     private service: Service
-  ) { }
+  ) {}
 
   requestForm: FormGroup = new FormGroup({});
   data: any = this.adminService.user;
   submitted = false;
+  imageSrc: any = '';
+  file: any = '';
+  fileName: any = '';
 
   ngOnInit(): void {
-    console.log(this.data);
     this.requestForm = this.fb.group({
       title: new FormControl(''),
       message: new FormControl(''),
       feedbackLevel: new FormControl(''),
+      url: new FormControl(''),
     });
   }
   get f() {
     return this.requestForm.controls;
   }
-  sendRequest() {
-    const data: any = {
-      title: this.f.title.value,
-      message: this.f.message.value,
-      feedbackLevel: this.f.feedbackLevel.value,
-      type: 'request',
-    };
 
-    this.service.sendMessage(data).subscribe((res) => {
+  onFileSelect(event: any) {
+    const file = event.target.files[0];
+    this.file = file;
+    this.fileName = file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageSrc = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  sendRequest() {
+    const formData = new FormData();
+
+    formData.append('url', this.file);
+    formData.append('title', this.requestForm.controls['title'].value);
+    formData.append('message', this.requestForm.controls['message'].value);
+    formData.append(
+      'feedbackLevel',
+      this.requestForm.controls['feedbackLevel'].value
+    );
+    formData.append('type', 'request');
+
+    this.service.sendMessage(formData).subscribe((res) => {
       console.log(res);
       this.submitted = true;
     });
@@ -46,5 +65,6 @@ export class RequestFormComponent implements OnInit {
   newMsg(): void {
     this.submitted = false;
     this.requestForm.reset();
+    this.imageSrc = '';
   }
 }

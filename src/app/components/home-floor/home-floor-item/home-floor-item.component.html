@@ -8,7 +8,9 @@
           <div class="card border-0 cs-shadow rounded feedback">
             <div class="card-body">
               <div class="header">
-                <strong><Label>VFeedBack For {{ floorData.name }}</Label></strong>
+                <strong
+                  ><Label>VFeedBack For {{ floorData?.name }}</Label></strong
+                >
               </div>
               <form [formGroup]="submitForm" (submit)="sendMessage()">
                 <div class="title pt-3 pb-3">
@@ -17,8 +19,13 @@
                     <small class="text-danger">Required</small>
                   </div>
                   <div class="pb-3">
-                    <input formControlName="title" type="text" class="form-control shadow-sm"
-                      placeholder="Please input the title" name="title" />
+                    <input
+                      formControlName="title"
+                      type="text"
+                      class="form-control shadow-sm"
+                      placeholder="Please input the title"
+                      name="title"
+                    />
                   </div>
                 </div>
                 <div class="feedback pb-3">
@@ -27,12 +34,19 @@
                     <small class="text-danger">Required</small>
                   </div>
                   <div class="pb-3">
-                    <textarea formControlName="message" name="message" id="" rows="3" class="form-control"
-                      placeholder="Message"></textarea>
+                    <textarea
+                      formControlName="message"
+                      name="message"
+                      id=""
+                      rows="3"
+                      class="form-control"
+                      placeholder="Message"
+                    ></textarea>
                   </div>
                   <small class="text-muted">
-                    Please feel free to send us your feedback or request about our
-                    services so far, Make sure to include hopes, fears, expectation
+                    Please feel free to send us your feedback or request about
+                    our services so far, Make sure to include hopes, fears,
+                    expectation
                   </small>
                 </div>
                 <div class="situation pb-3">
@@ -43,17 +57,65 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-check form-check-inline">
-                        <input formControlName="feedbackLevel" class="form-check-input" type="radio"
-                          name="feedbackLevel" id="High" value="High" />
-                        <label class="form-check-label" for="High"> High </label>
+                        <input
+                          formControlName="feedbackLevel"
+                          class="form-check-input"
+                          type="radio"
+                          name="feedbackLevel"
+                          id="High"
+                          value="High"
+                        />
+                        <label class="form-check-label" for="High">
+                          High
+                        </label>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-check form-check-inline">
-                        <input formControlName="feedbackLevel" class="form-check-input" type="radio"
-                          name="feedbackLevel" id="Normal" value="Medium" />
-                        <label class="form-check-label" for="Normal">Normal </label>
+                        <input
+                          formControlName="feedbackLevel"
+                          class="form-check-input"
+                          type="radio"
+                          name="feedbackLevel"
+                          id="Normal"
+                          value="Medium"
+                        />
+                        <label class="form-check-label" for="Normal"
+                          >Normal
+                        </label>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pb-3">
+                  <div class="pb-2">
+                    <div class="mb-1">
+                      <label class="form-check-label">
+                        <strong> Picture </strong>
+                      </label>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-light"
+                      (click)="filePicker.click()"
+                    >
+                      Pick image
+                    </button>
+                    <input
+                      type="file"
+                      #filePicker
+                      (change)="onFileSelect($event)"
+                      style="display: none"
+                    />
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img
+                          [src]="imageSrc"
+                          *ngIf="imageSrc"
+                          class="pt-3 img-fluid"
+                        />
+                      </div>
+                      <div class="col-md-6"></div>
                     </div>
                   </div>
                 </div>

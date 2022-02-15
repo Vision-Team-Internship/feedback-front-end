@@ -9,16 +9,20 @@ import { Service } from 'src/app/services/service.service';
   styleUrls: ['./room-item.component.css'],
 })
 export class RoomItemComponent implements OnInit {
-  roomID: any;
-  roomData: any;
-  submitForm: FormGroup = new FormGroup({});
-
   constructor(
     private service: Service,
     private router: Router,
     private actRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) { }
+  ) {}
+
+  roomID: any;
+  roomData: any;
+  submitForm: FormGroup = new FormGroup({});
+  imageSrc: any;
+  file: any = '';
+  fileName: any = '';
+  submitted = false;
 
   ngOnInit(): void {
     this.roomID = this.actRoute.snapshot.params['id'];
@@ -28,6 +32,7 @@ export class RoomItemComponent implements OnInit {
       message: new FormControl(''),
       feedbackLevel: new FormControl(''),
       room_id: new FormControl(''),
+      url: new FormControl(''),
     });
   }
 
@@ -36,23 +41,39 @@ export class RoomItemComponent implements OnInit {
       this.roomData = room.payload;
     });
   }
-  submitted = false;
+
   newMsg(): void {
     this.submitted = false;
+    this.imageSrc = '';
     this.submitForm.reset();
   }
-  sendMessage(): void {
-    const data: any = {
-      title: this.submitForm.controls['title'].value,
-      message: this.submitForm.controls['message'].value,
-      feedbackLevel: this.submitForm.controls['feedbackLevel'].value,
-      feedbackType: 'room',
-      uniqueIDs: [this.submitForm.controls['room_id'].value],
-      type: 'report'
+
+  onFileSelect(event: any) {
+    const file = event.target.files[0];
+    this.file = file;
+    this.fileName = file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageSrc = reader.result;
     };
-    console.log(this.submitForm.value);
-    console.log(data);
-    this.service.sendMessage(data).subscribe(
+    reader.readAsDataURL(file);
+  }
+
+  sendMessage() {
+    const formData = new FormData();
+
+    formData.append('url', this.file);
+    formData.append('title', this.submitForm.controls['title'].value);
+    formData.append('message', this.submitForm.controls['message'].value);
+    formData.append(
+      'feedbackLevel',
+      this.submitForm.controls['feedbackLevel'].value
+    );
+    formData.append('feedbackType', 'room');
+    formData.append('uniqueIDs', this.roomID);
+    formData.append('type', 'report');
+
+    this.service.sendMessage(formData).subscribe(
       (response) => {
         console.log(response);
         this.submitted = true;

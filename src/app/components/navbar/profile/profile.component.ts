@@ -8,20 +8,20 @@ import { User } from 'src/model';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private admin: AdminService) { }
+  constructor(private admin: AdminService) {}
   userID!: string;
   user!: User;
   userData: any = this.admin.user;
 
   ngOnInit(): void {
-    this.userID = this.admin.user._id
+    this.userID = this.admin.user._id;
     this.loadUserDetail(this.userID);
   }
 
   loadUserDetail(id: string) {
     this.admin.getUserDetail(id).subscribe((user: any) => {
       this.user = user.payload;
-    })
+    });
   }
 
   logout() {

@@ -9,13 +9,21 @@
               <strong>Request Form</strong>
             </div>
             <div class="card-body">
-              <form [formGroup]="requestForm" (submit)="sendRequest()"
-                onsubmit="myButton.disabled = true; return true;">
+              <form
+                [formGroup]="requestForm"
+                (submit)="sendRequest()"
+                onsubmit="myButton.disabled = true; return true;"
+              >
                 <div class="form-group">
                   <label for="Request-title">
                     <strong>Title</strong>
                   </label>
-                  <input type="text" class="form-control form-control-lg" id="Request-title" formControlName="title" />
+                  <input
+                    type="text"
+                    class="form-control form-control-lg"
+                    id="Request-title"
+                    formControlName="title"
+                  />
                   <small id="emailHelp" class="form-text text-muted">
                     Request anything you want
                   </small>
@@ -24,7 +32,12 @@
                   <label for="Request-message">
                     <strong>Tell us why!</strong>
                   </label>
-                  <textarea id="Request-message" rows="5" class="form-control" formControlName="message"></textarea>
+                  <textarea
+                    id="Request-message"
+                    rows="5"
+                    class="form-control"
+                    formControlName="message"
+                  ></textarea>
 
                   <small id="emailHelp" class="form-text text-muted">
                     Our response will send to email:
@@ -40,21 +53,77 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-check form-check-inline">
-                        <input formControlName="feedbackLevel" class="form-check-input" type="radio"
-                          name="feedbackLevel" id="High" value="High" required />
-                        <label class="form-check-label text-danger" for="High">Priority</label>
+                        <input
+                          formControlName="feedbackLevel"
+                          class="form-check-input"
+                          type="radio"
+                          name="feedbackLevel"
+                          id="High"
+                          value="High"
+                          required
+                        />
+                        <label class="form-check-label text-danger" for="High"
+                          >Priority</label
+                        >
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-check form-check-inline">
-                        <input formControlName="feedbackLevel" class="form-check-input" type="radio"
-                          name="feedbackLevel" id="Normal" value="Medium" required />
-                        <label class="form-check-label text-primary" for="Normal">Normal</label>
+                        <input
+                          formControlName="feedbackLevel"
+                          class="form-check-input"
+                          type="radio"
+                          name="feedbackLevel"
+                          id="Normal"
+                          value="Medium"
+                          required
+                        />
+                        <label
+                          class="form-check-label text-primary"
+                          for="Normal"
+                          >Normal</label
+                        >
                       </div>
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-primary col-12" [disabled]="!requestForm.valid" name="myButton">
+                <div class="pb-3">
+                  <div class="pb-2">
+                    <div class="mb-1">
+                      <label class="form-check-label">
+                        <strong> Picture </strong>
+                      </label>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-light"
+                      (click)="filePicker.click()"
+                    >
+                      Pick image
+                    </button>
+                    <input
+                      type="file"
+                      #filePicker
+                      (change)="onFileSelect($event)"
+                      style="display: none"
+                    />
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img
+                          [src]="imageSrc"
+                          *ngIf="imageSrc"
+                          class="pt-3 img-fluid"
+                        />
+                      </div>
+                      <div class="col-md-6"></div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="btn btn-primary col-12"
+                  [disabled]="!requestForm.valid"
+                  name="myButton"
+                >
                   Send Request
                 </button>
               </form>
